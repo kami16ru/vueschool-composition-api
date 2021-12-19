@@ -20,7 +20,7 @@ export default {
   components: { YummyMeal },
   setup() {
     const name = ref('The Snazzy tasty Burger')
-    const cart = reactive([])
+    const cart = ref([])
     const meal = reactive({
       name: 'Hamburger',
       price: 5
@@ -32,9 +32,9 @@ export default {
       { name: 'Frees', price: 2 }
     ])
     const placeOrder = () => alert('You\'re order has been placed!')
-    const addItemToCart = (item) => cart.push(item)
+    const addItemToCart = (item) => cart.value.push(item)
 
-    watch(() => [...cart],(newValue, oldValue) => console.log(newValue, oldValue), {})
+    watch(() => [...cart.value],(newValue, oldValue) => console.log(newValue, oldValue), {})
 
     return { name, placeOrder, addItemToCart, meal, meals };
   }
