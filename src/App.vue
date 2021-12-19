@@ -1,13 +1,79 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <h1>{{ name }}</h1>
+  <input type="text" v-model="name">
+  <button  @click="placeOrder">Place Order</button>
+  <button  @click="removeWatcher">Hide Cart Alerts</button>
+
+  <br>
+  <label for="currencySymbol">Currency</label>
+  <select id="currencySymbol" v-model="currencySymbol">
+    <option value="$">Dollars ($)</option>
+    <option value="£">Pound (£)</option>
+  </select>
+
+  <YummyMeal
+      v-for="meal in meals"
+      :name="meal.name"
+      :price="meal.price"
+      @addToCart="addItemToCart"
+  />
+
 </template>
+
+<script>
+import { ref, reactive, watch, provide, onMounted } from 'vue'
+import YummyMeal from '@/components/YummyMeal.vue'
+
+export default {
+  components: { YummyMeal },
+  setup() {
+    const currencySymbol = ref('$')
+    const name = ref('The Snazzy tasty Burger')
+
+    provide('currencySymbol', currencySymbol)
+
+    const cart = reactive([])
+    const meal = reactive({
+      name: 'Hamburger',
+      price: 5
+    })
+    const meals = reactive([
+      { name: 'Hamburger', price: 5 },
+      { name: 'Cheeseburger', price: 6 },
+      { name: 'Impossible Burger', price: 7 },
+      { name: 'Frees', price: 2 }
+    ])
+
+    // Methods
+    const placeOrder = () => alert('You\'re order has been placed!')
+
+    // Events
+    const addItemToCart = (item) => cart.push(item)
+
+    // Watchers
+    const removeWatcher = watch([() => [...cart]],
+        (newValue, oldValue) => alert(newValue.join('\n')),
+        {})
+
+    onMounted( () => {
+      console.log(name.value)
+    })
+
+    console.log('this is essentially the same as logging inside of the created hook')
+
+    return {
+      name,
+      placeOrder,
+      addItemToCart,
+      meal,
+      meals,
+      removeWatcher,
+      currencySymbol
+    };
+  }
+}
+
+</script>
 
 <style>
 #app {
