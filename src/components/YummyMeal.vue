@@ -15,7 +15,9 @@ export default {
     price: Number
   },
   setup(props, { emit }) {
-    const addToCart = () => emit('addToCart', props.name)
+    const addToCart = () => {
+      emit('addToCart', props.name)
+    }
     const pricePretty = computed(() => `$${props.price.toFixed(2)}`)
     const pricePrettySentence = computed(
         () => `The price of this item is ${pricePretty.value}`)
