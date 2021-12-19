@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref, reactive, watchEffect } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import YummyMeal from '@/components/YummyMeal.vue'
 
 export default {
@@ -33,11 +33,11 @@ export default {
       { name: 'Frees', price: 2 }
     ])
     const placeOrder = () => alert('You\'re order has been placed!')
-    const addItemToCart = (item) => {
-      cart.push(item)
-    }
+    const addItemToCart = (item) => cart.push(item)
 
-    const removeWatcher = watchEffect(() => alert(cart.join('\n')))
+    const removeWatcher = watch([() => [...cart]],
+        (newValue, oldValue) => alert(newValue.join('\n')),
+        {})
 
     return { name, placeOrder, addItemToCart, meal, meals, removeWatcher };
   }
