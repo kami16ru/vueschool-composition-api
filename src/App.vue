@@ -2,7 +2,7 @@
   <h1>{{ name }}</h1>
   <input type="text" v-model="name">
   <button  @click="placeOrder">Place Order</button>
-  <button  @click="removeWatcher">Remove Watcher</button>
+  <button  @click="removeWatcher">Hide Cart Alerts</button>
 
   <YummyMeal
       v-for="meal in meals"
@@ -35,7 +35,9 @@ export default {
     const placeOrder = () => alert('You\'re order has been placed!')
     const addItemToCart = (item) => cart.push(item)
 
-    const removeWatcher = watch([name, () => [...cart]],(newValue, oldValue) => console.log(newValue, oldValue), {})
+    const removeWatcher = watch([() => [...cart]],
+        (newValue, oldValue) => alert(newValue.join('\n')),
+        {})
 
     return { name, placeOrder, addItemToCart, meal, meals, removeWatcher };
   }
