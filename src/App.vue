@@ -1,5 +1,6 @@
 <template>
   <h1>{{ name }}</h1>
+  <input type="text" v-model="name">
   <button  @click="placeOrder">Place Order</button>
 
   <YummyMeal :name="meal.name" :price="meal.price" @addToCard="addItemToCard" />
@@ -7,7 +8,7 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import YummyMeal from '@/components/YummyMeal.vue'
 
 export default {
@@ -21,6 +22,8 @@ export default {
     console.log(meal.name)
     const placeOrder = () => alert('You\'re order has been placed!')
     const addItemToCard = (item) => alert(`One ${item} added to card!`)
+
+    watch(name, (newName, oldName) => console.log(newName, oldName))
 
     return { name, placeOrder, addItemToCard, meal };
   }
