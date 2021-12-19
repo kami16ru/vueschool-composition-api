@@ -7,12 +7,14 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import YummyMeal from '@/components/YummyMeal.vue'
 
 export default {
   components: { YummyMeal },
   setup() {
-    const name = 'The Snazzy Burger'
+    const name = ref('The Snazzy tasty Burger')
+    name.value = 'Hello from setup'
     const placeOrder = () => alert('You\'re order has been placed!')
     const addItemToCard = (item) => alert(`One ${item} added to card!`)
 
