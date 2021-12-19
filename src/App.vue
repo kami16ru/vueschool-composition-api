@@ -24,7 +24,8 @@ export default {
     const addItemToCard = (item) => alert(`One ${item} added to card!`)
 
     watch(name, (newName, oldName) => console.log(newName, oldName), {
-      immediate: true
+      immediate: true,
+      deep: true
     })
 
     return { name, placeOrder, addItemToCard, meal };
