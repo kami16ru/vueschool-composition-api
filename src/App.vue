@@ -4,6 +4,13 @@
   <button  @click="placeOrder">Place Order</button>
   <button  @click="removeWatcher">Hide Cart Alerts</button>
 
+  <br>
+  <label for="currencySymbol">Currency</label>
+  <select id="currencySymbol" v-model="currencySymbol">
+    <option value="$">Dollars ($)</option>
+    <option value="£">Pound (£)</option>
+  </select>
+
   <YummyMeal
       v-for="meal in meals"
       :name="meal.name"
@@ -20,10 +27,11 @@ import YummyMeal from '@/components/YummyMeal.vue'
 export default {
   components: { YummyMeal },
   setup() {
-    const currencySymbol = '$'
-    provide('currencySymbol', currencySymbol)
-
+    const currencySymbol = ref('$')
     const name = ref('The Snazzy tasty Burger')
+
+    provide('currencySymbol', currencySymbol)
+    
     const cart = reactive([])
     const meal = reactive({
       name: 'Hamburger',
@@ -48,7 +56,8 @@ export default {
       addItemToCart,
       meal,
       meals,
-      removeWatcher
+      removeWatcher,
+      currencySymbol
     };
   }
 }

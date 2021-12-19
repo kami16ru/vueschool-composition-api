@@ -1,6 +1,6 @@
 <template>
   <p>
-    <strong>{{ name }}</strong>
+    <strong>{{ name + ' ' }}</strong>
 
     <YummyMealPrice :price="price" />
 
