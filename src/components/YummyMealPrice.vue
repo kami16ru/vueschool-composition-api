@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, inject } from "vue";
 
 export default {
   props: {
@@ -13,8 +13,10 @@ export default {
     currencySymbol: String
   },
   setup(props) {
+    const currencySymbol = inject('currencySymbol')
+
     const pricePretty = computed(
-        () => props.currencySymbol + props.price.toFixed(2)
+        () => currencySymbol.value + props.price.toFixed(2)
     )
 
     return { pricePretty }

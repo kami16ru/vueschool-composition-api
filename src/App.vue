@@ -9,19 +9,20 @@
       :name="meal.name"
       :price="meal.price"
       @addToCart="addItemToCart"
-      :currencySymbol="currencySymbol"
   />
 
 </template>
 
 <script>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, provide } from 'vue'
 import YummyMeal from '@/components/YummyMeal.vue'
 
 export default {
   components: { YummyMeal },
   setup() {
     const currencySymbol = '$'
+    provide('currencySymbol', currencySymbol)
+
     const name = ref('The Snazzy tasty Burger')
     const cart = reactive([])
     const meal = reactive({
@@ -47,8 +48,7 @@ export default {
       addItemToCart,
       meal,
       meals,
-      removeWatcher,
-      currencySymbol
+      removeWatcher
     };
   }
 }
