@@ -14,6 +14,7 @@ export default {
   components: { YummyMeal },
   setup() {
     const name = ref('The Snazzy tasty Burger')
+    name.value = 'Hello from setup'
     const placeOrder = () => alert('You\'re order has been placed!')
     const addItemToCard = (item) => alert(`One ${item} added to card!`)
 
