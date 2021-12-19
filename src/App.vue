@@ -2,6 +2,7 @@
   <h1>{{ name }}</h1>
   <input type="text" v-model="name">
   <button  @click="placeOrder">Place Order</button>
+  <button  @click="removeWatcher">Remove Watcher</button>
 
   <YummyMeal
       v-for="meal in meals"
@@ -20,7 +21,7 @@ export default {
   components: { YummyMeal },
   setup() {
     const name = ref('The Snazzy tasty Burger')
-    const cart = ref([])
+    const cart = reactive([])
     const meal = reactive({
       name: 'Hamburger',
       price: 5
@@ -32,11 +33,11 @@ export default {
       { name: 'Frees', price: 2 }
     ])
     const placeOrder = () => alert('You\'re order has been placed!')
-    const addItemToCart = (item) => cart.value.push(item)
+    const addItemToCart = (item) => cart.push(item)
 
-    watch(() => [...cart.value],(newValue, oldValue) => console.log(newValue, oldValue), {})
+    const removeWatcher = watch([name, () => [...cart]],(newValue, oldValue) => console.log(newValue, oldValue), {})
 
-    return { name, placeOrder, addItemToCart, meal, meals };
+    return { name, placeOrder, addItemToCart, meal, meals, removeWatcher };
   }
 }
 
