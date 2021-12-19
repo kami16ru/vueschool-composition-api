@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ref, reactive, watch, provide } from 'vue'
+import { ref, reactive, watch, provide, onMounted } from 'vue'
 import YummyMeal from '@/components/YummyMeal.vue'
 
 export default {
@@ -31,7 +31,7 @@ export default {
     const name = ref('The Snazzy tasty Burger')
 
     provide('currencySymbol', currencySymbol)
-    
+
     const cart = reactive([])
     const meal = reactive({
       name: 'Hamburger',
@@ -43,12 +43,23 @@ export default {
       { name: 'Impossible Burger', price: 7 },
       { name: 'Frees', price: 2 }
     ])
+
+    // Methods
     const placeOrder = () => alert('You\'re order has been placed!')
+
+    // Events
     const addItemToCart = (item) => cart.push(item)
 
+    // Watchers
     const removeWatcher = watch([() => [...cart]],
         (newValue, oldValue) => alert(newValue.join('\n')),
         {})
+
+    onMounted( () => {
+      console.log(name.value)
+    })
+
+    console.log('this is essentially the same as logging inside of the created hook')
 
     return {
       name,
