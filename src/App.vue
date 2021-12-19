@@ -2,23 +2,27 @@
   <h1>{{ name }}</h1>
   <button  @click="placeOrder">Place Order</button>
 
-  <YummyMeal name="Gamburger" :price="5" @addToCard="addItemToCard" />
+  <YummyMeal :name="meal.name" :price="meal.price" @addToCard="addItemToCard" />
 
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import YummyMeal from '@/components/YummyMeal.vue'
 
 export default {
   components: { YummyMeal },
   setup() {
     const name = ref('The Snazzy tasty Burger')
-    name.value = 'Hello from setup'
+    const meal = reactive({
+      name: 'Hamburger',
+      price: 5
+    })
+    console.log(meal.name)
     const placeOrder = () => alert('You\'re order has been placed!')
     const addItemToCard = (item) => alert(`One ${item} added to card!`)
 
-    return { name, placeOrder, addItemToCard };
+    return { name, placeOrder, addItemToCard, meal };
   }
 }
 
