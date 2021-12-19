@@ -9,6 +9,7 @@
       :name="meal.name"
       :price="meal.price"
       @addToCart="addItemToCart"
+      :currencySymbol="currencySymbol"
   />
 
 </template>
@@ -20,6 +21,7 @@ import YummyMeal from '@/components/YummyMeal.vue'
 export default {
   components: { YummyMeal },
   setup() {
+    const currencySymbol = '$'
     const name = ref('The Snazzy tasty Burger')
     const cart = reactive([])
     const meal = reactive({
@@ -39,7 +41,15 @@ export default {
         (newValue, oldValue) => alert(newValue.join('\n')),
         {})
 
-    return { name, placeOrder, addItemToCart, meal, meals, removeWatcher };
+    return {
+      name,
+      placeOrder,
+      addItemToCart,
+      meal,
+      meals,
+      removeWatcher,
+      currencySymbol
+    };
   }
 }
 

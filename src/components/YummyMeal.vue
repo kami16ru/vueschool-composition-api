@@ -1,28 +1,29 @@
 <template>
   <p>
     <strong>{{ name }}</strong>
-    {{ pricePrettySentence }}
+
+    <YummyMealPrice :price="price" :currencySymbol="currencySymbol" />
+
     <button @click="addToCart">Add to Card</button>
   </p>
 </template>
 
 <script>
-import { computed } from 'vue'
+import YummyMealPrice from "@/components/YummyMealPrice.vue";
 
 export default {
+  components: { YummyMealPrice },
   props: {
     name: String,
-    price: Number
+    price: Number,
+    currencySymbol: String
   },
   setup(props, { emit }) {
     const addToCart = () => {
       emit('addToCart', props.name)
     }
-    const pricePretty = computed(() => `$${props.price.toFixed(2)}`)
-    const pricePrettySentence = computed(
-        () => `The price of this item is ${pricePretty.value}`)
 
-    return { addToCart, pricePretty, pricePrettySentence }
+    return { addToCart }
   }
 }
 </script>
