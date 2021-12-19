@@ -2,7 +2,7 @@
   <p>
     <strong>{{ name }}</strong>
     {{ pricePrettySentence }}
-    <button @click="addToCard">Add to Card</button>
+    <button @click="addToCart">Add to Card</button>
   </p>
 </template>
 
@@ -15,12 +15,12 @@ export default {
     price: Number
   },
   setup(props, { emit }) {
-    const addToCard = () => emit('addToCard', props.name)
+    const addToCart = () => emit('addToCart', props.name)
     const pricePretty = computed(() => `$${props.price.toFixed(2)}`)
     const pricePrettySentence = computed(
         () => `The price of this item is ${pricePretty.value}`)
 
-    return { addToCard, pricePretty, pricePrettySentence }
+    return { addToCart, pricePretty, pricePrettySentence }
   }
 }
 </script>
