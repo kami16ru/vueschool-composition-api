@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import YummyMealPrice from "@/components/YummyMealPrice.vue";
+import YummyMealPrice from "@/apps/basics/components/YummyMealPrice.vue";
 
 export default {
   components: { YummyMealPrice },

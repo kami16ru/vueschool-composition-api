@@ -17,12 +17,11 @@
       :price="meal.price"
       @addToCart="addItemToCart"
   />
-
 </template>
 
 <script>
 import { ref, reactive, watch, provide, onMounted } from 'vue'
-import YummyMeal from '@/components/YummyMeal.vue'
+import YummyMeal from '@/apps/basics/components/YummyMeal.vue'
 
 export default {
   components: { YummyMeal },

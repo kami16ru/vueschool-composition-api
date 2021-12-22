@@ -1,4 +1,5 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+if ((import.meta.env.VITE_APP_APP) === 'basics')
+    import('./apps/basics/main')
 
-createApp(App).mount('#app')
+if ((import.meta.env.VITE_APP_APP) === 'blog')
+    import('./apps/blog/main')
